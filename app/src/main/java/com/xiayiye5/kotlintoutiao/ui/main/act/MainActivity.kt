@@ -1,7 +1,6 @@
 package com.xiayiye5.kotlintoutiao.ui.main.act
 
 import android.util.Log
-import android.widget.Toast
 import com.xiayiye5.kotlintoutiao.R
 import com.xiayiye5.kotlintoutiao.base.BaseActivity
 import com.xiayiye5.kotlintoutiao.ui.main.presenter.MainPresenter
@@ -13,7 +12,8 @@ class MainActivity : BaseActivity<MainView, MainPresenter>(), MainView {
 
     override fun init() {
         clickMe.setOnClickListener {
-            getPresenter()?.showToast("测试数据")
+            //            getPresenter()?.showToast("测试数据")
+            getPresenter()?.getTest()
         }
     }
 
@@ -24,7 +24,7 @@ class MainActivity : BaseActivity<MainView, MainPresenter>(), MainView {
 
 
     override fun <T> setData(data: T) {
-        Toast.makeText(this, data as String, Toast.LENGTH_LONG).show()
+//        Toast.makeText(this, data as String, Toast.LENGTH_LONG).show()
         Log.e("打印数据", data.toString())
     }
 

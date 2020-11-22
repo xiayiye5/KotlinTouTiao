@@ -1,13 +1,10 @@
-package com.xiayiye5.kotlintoutiao.ui.main.presenter
+package com.xiayiye5.kotlintoutiao.http
 
-import android.widget.Toast
-import com.xiayiye5.kotlintoutiao.http.HttpUtils
-import com.xiayiye5.kotlintoutiao.http.ResponseListener
-import com.xiayiye5.kotlintoutiao.http.UserApi
 import com.xiayiye5.kotlintoutiao.mvp.model.BaseModel
-import com.xiayiye5.kotlintoutiao.mvp.presenter.BasePresenter
 import com.xiayiye5.kotlintoutiao.ui.main.model.MainModel
-import com.xiayiye5.kotlintoutiao.ui.main.view.MainView
+import io.reactivex.Observable
+import io.reactivex.Observer
+import retrofit2.http.GET
 
 /*
  * Copyright (c) 2020, smuyyh@gmail.com All Rights Reserved.
@@ -38,30 +35,17 @@ import com.xiayiye5.kotlintoutiao.ui.main.view.MainView
 
 /**
  * @author 下一页5（轻飞扬）
- * 创建时间：2020/11/16 21:59
+ * 创建时间：2020/11/22 13:11
  * 个人小站：http://yhsh.wap.ai(已挂)
  * 最新小站：http://www.iyhsh.icoc.in
  * 联系作者：企鹅 13343401268
  * 博客地址：http://blog.csdn.net/xiayiye5
  * 项目名称：KotlinTouTiao
- * 文件包名：com.xiayiye5.kotlintoutiao.ui.main.presenter
+ * 文件包名：com.xiayiye5.kotlintoutiao.http
  * 文件说明：
  */
-class MainPresenter : BasePresenter<MainView>() {
-    fun showToast(data: String) {
-        getBaseView()!!.setData(data)
-    }
-
-    fun getTest() {
-        HttpUtils.sendHttp(HttpUtils.createApi(UserApi::class.java).getTest(),
-            object : ResponseListener<BaseModel<MainModel>> {
-                override fun onSuccess(data: BaseModel<MainModel>) {
-                    getBaseView()!!.setData(data)
-                }
-
-                override fun onFail(error: String) {
-                    getBaseView()!!.setError(error)
-                }
-            })
-    }
+interface UserApi {
+//    @GET("journalismApi")
+    @GET("/api/v3/search/song?format=json&keyword=像我这样的人&page=1&pagesize=20&showtype=1")
+    fun getTest(): Observable<BaseModel<MainModel>>
 }
